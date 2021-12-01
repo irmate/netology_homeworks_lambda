@@ -26,15 +26,20 @@ public class Main {
         return x / y;
     };
 
-    3. Можно написать лямбда-выражение аналогичное выражению abs которое будет отвечать за исключение принятие аргументом "y" значения 0.
-    Имплементация данного примера в основном коде.
+    3. Можно написать лямбда-выражение аналогичное выражению abs которое будет отвечать за исключение принятие аргументом "y" значения 0:
+    int c = calc.divide.apply(a, calc.notNull.apply(b));
      */
 
     public static void main(String[] args) {
         Calculator calc = Calculator.instance.get();
-        int a = calc.plus.apply(1, 2);
-        int b = calc.minus.apply(1, 1);
-        int c = calc.divide.apply(a, calc.notNull.apply(b));
-        calc.println.accept(c);
+        try {
+            int a = calc.plus.apply(1, 2);
+            int b = calc.minus.apply(1, 1);
+            int c = calc.divide.apply(a, b);
+            calc.println.accept(c);
+        } catch (ArithmeticException e) {
+            System.out.println("Ошибка! Деление на 0");
+        }
     }
 }
+
